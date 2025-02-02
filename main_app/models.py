@@ -14,9 +14,9 @@ class Article(models.Model):
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    comments = models.ForeignKey(Comment, on_delete=models.CASCADE)
     
 
     def __str__(self):
         return self.name
+    
 # Create your models here.

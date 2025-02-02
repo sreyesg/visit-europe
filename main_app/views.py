@@ -10,3 +10,4 @@ def landing(request):
 class ArticleCreate(CreateView):
     model = Article
     fields = '__all__'
+    success_url = '/'
