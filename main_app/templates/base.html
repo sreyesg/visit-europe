@@ -14,14 +14,16 @@
         </div>
         <nav>
             <ul>
-                <li>Signin</li>
+                <li>
+                    <a href="{% url "article_create" %}">Create Article</a>
+                </li>
                 <li>Signout</li>
                 <li>landing</li>
             </ul>
         </nav>
     </header>
     <main>
-        {% block main %}
+        {% block content %}
         {% endblock  %}
     </main>
 </body>
