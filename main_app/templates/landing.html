@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block content %}
+{% for article in articles  %}
+
+<div>
+    <h2>{{article.name }}</h2>
+    <textarea name="" id="">{{ article.content }}</textarea>
+    <p>{{article.country}}</p>
+    <p>{{article.city}}</p>
+    
+</div>
+
+{% endfor %}
+
+{% endblock %}
