@@ -10,7 +10,8 @@ class Comment(models.Model):
     
 class Article(models.Model):
     name = models.CharField(max_length=100)
-    content = models.TextField(max_length=250)
+    summary = models.CharField(max_length=100)
+    content = models.TextField(max_length=1000)
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

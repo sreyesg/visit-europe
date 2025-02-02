@@ -3,14 +3,15 @@
 {% block head %}
 {% endblock %}
 {% block content %}
-{% for article in articles  %}
 
+<h1>Landing Page nino</h1>
+{% for article in articles  %}
 <div>
     <h2>{{article.name }}</h2>
-    <textarea name="" id="">{{ article.content }}</textarea>
+    <p>{{ article.summary }}</p>
     <p>{{article.country}}</p>
     <p>{{article.city}}</p>
-    
+    <a href="{% url "article_detail" article.id %}">Visit Article</a>
 </div>
 
 {% endfor %}
