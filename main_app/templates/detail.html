@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}{% endblock %}
+{% block content %}
+
+<h1>Article Details</h1>
+
+<div>
+    <h1>{{ article.name }}</h1>
+    <p>{{ article.content }}</p>
+    <a href="{% url "article_update" article.id %}">Update</a>
+    <a href="{% url "article_delete" article.id %}">Delete</a>
+</div>
+
+{% endblock %}
