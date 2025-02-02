@@ -19,7 +19,9 @@ class ArticleCreate(CreateView):
     fields = '__all__'
     success_url = '/'
 
-# class ArticleUpdate(UpdateView):
+class ArticleUpdate(UpdateView):
+    model = Article
+    fields = ['summary','content','country','city']
 
 
 # class ArticleDelete(DeleteView):

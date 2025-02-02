@@ -7,7 +7,11 @@
 {% block content %}
 
 <div class="page-header">
+    {% if article  %}
+    <h1>edit: {{ article.name }}</h1>
+    {% else %}
     <h1>Add an Article</h1>
+    {% endif %}
     <img src="" alt="">
 </div>
 <form action="" method='POST'>
