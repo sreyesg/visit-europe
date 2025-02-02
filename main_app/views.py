@@ -24,4 +24,6 @@ class ArticleUpdate(UpdateView):
     fields = ['summary','content','country','city']
 
 
-# class ArticleDelete(DeleteView):
+class ArticleDelete(DeleteView):
+    model = Article
+    success_url = '/'

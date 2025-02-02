@@ -9,6 +9,7 @@
     <h1>{{ article.name }}</h1>
     <p>{{ article.content }}</p>
     <a href="{% url "article_update" article.id %}">Update</a>
+    <a href="{% url "article_delete" article.id %}">Delete</a>
 </div>
 
 {% endblock %}
