@@ -5,6 +5,22 @@
 
 <h1>Article Details</h1>
 
+
+<div>
+    {% for photo  in article.photo_set.all  %}
+        <img src="{{ photo.url }}" alt="">
+        {% empty %}
+
+        <div>No photos uploaded</div>
+    
+    {% endfor %}
+    <form action="{% url 'add_photo' article.id %}" enctype="multipart/form-data" method="POST" class="subsection-content">
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <br><br>
+        <button type="submit" class="btn">Upload Photo</button>
+    </form>
+</div>
 <div>
     <h1>{{ article.name }}</h1>
     <p>{{ article.content }}</p>
