@@ -1,6 +1,8 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% tailwind_css %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visit Europe</title>
@@ -10,7 +12,7 @@
 <body>
     <header>
         <div class="header-logo-container">
-            <p>Logo here</p>
+            <p class='bg-blue-400'>Logo here</p>
         </div>
         <nav>
             <ul>
@@ -19,7 +21,7 @@
                 </li>
                 <li>see my posts</li>
                 <li><a href="{% url "landing" %}">see all</a></li>
-                <li>Signout</li>
+                <li class='bg-yellow-300'>Signout</li>
                 <li>home</li>
             </ul>
         </nav>
