@@ -11,14 +11,13 @@
     </section>
     <section class=" py-5">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 p-3  mx-[15%] mt-5 min-h-[500px]">
-            
+
             {% for article in articles  %}
             
             <div class="bg-green-100 rounded-lg shadow-xl">    
                 <img src="{% static "images/carnival.jpg" %}" class='h-[60%] w-full object-cover' alt="" >
                 <h1 class='px-2 text-lg mb-2 mt-2'>{{ article.name }}</h1>
-                <p class='text-xs px-3 leading-relaxed'>a historic festival renowned for its elaborate masks, opulent costumes, grand parades, 
-                    and lively street performances, celebrating Venetian culture and tradition.</p>
+                <p class='text-xs px-3 leading-relaxed'>{{ article.summary }}</p>
                 <div class="text-indigo-500 text-sm">
                     <a href="" class='flex justify-end items-center'>Learn More
                         <svg class="w-4 h-4 m-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
