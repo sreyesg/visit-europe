@@ -1,5 +1,91 @@
 {% extends "base.html" %}
 {% load static %}
+{% load static tailwind_tags %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <section class='bg-blue-300 w-full min-h-[380px]'>
+        <img src="{% static 'images/EuroLand.jpg' %}" class='object-cover' alt="">
+    </section>
+    <section class=" py-5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 p-3  mx-[15%] mt-5 min-h-[500px]">
+            <div class="bg-green-100 rounded-lg shadow-xl">
+                <img src="{% static "images/carnival.jpg" %}" class='h-[60%] w-full object-cover' alt="" >
+                <h1 class='px-2 text-lg mb-2 mt-2'>Venice</h1>
+                <p class='text-xs px-3 leading-relaxed'>a historic festival renowned for its elaborate masks, opulent costumes, grand parades, 
+                    and lively street performances, celebrating Venetian culture and tradition.</p>
+                <div class="text-indigo-500 text-sm">
+                    <a href="" class='flex justify-end items-center'>Learn More
+                        <svg class="w-4 h-4 m-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="M12 5l7 7-7 7"></path>
+                          </svg>
+                    </a>
+                    
+                </div>
+            </div>
+            <div class="bg-red-100 rounded-lg shadow-xl">
+                <img src="{% static "images/houses.jpeg" %}" alt="" class='h-3/4 w-full object-center'>
+                <h1 class='px-2'>Venice</h1>
+                <p class='px-2'>this is the paragra, asdfoasdf lkadthasdf lk talskdjf alsf jlk</p>
+                
+            </div>
+            <div class="bg-red-100 rounded-lg shadow-xl">
+                <img src="{% static "images/church.jpg" %}" alt="" class='h-3/4 w-full object-center'>
+                <h1>Italy</h1>
+                <p>this is the paragra, asdfoasdf lkadthasdf lk talskdjf alsf jlk</p>
+            </div>
+            <div class="bg-yellow-100 rounded-lg shadow-xl">
+                <img src="{% static "images/boats.jpeg" %}" alt="" class='h-3/4 w-full object-center'>
+                <h1 class='px-2'>Venece</h1>
+                <p class='px-2'>this is the paragra, asdfoasdf lkadthasdf lk talskdjf alsf jlk</p>
+            </div>
+            <div class="bg-yellow-100 rounded-lg shadow-xl">
+                <img src="{% static "images/carnival.jpg" %}" alt="" class='h-3/4 w-full object-center'>
+                <h1 class='px-2'>Venece</h1>
+                <p class='px-2'>this is the paragra, asdfoasdf lkadthasdf lk talskdjf alsf jlk</p>
+            </div>
+            
+            
+            <div class="bg-yellow-100 rounded-lg shadow-xl">
+                <img src="{% static "images/carnival.jpg" %}" class='h-3/4 w-full object-center' alt="">
+                <h1>This is the title</h1>
+                <p>this is the paragra, asdfoasdf lkadthasdf lk talskdjf alsf jlk</p>
+            </div>
+            
+    
+        </div>
+    </section>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends "base.html" %}
+{% load static %}
 {% block head %}
 {% endblock %}
 {% block content %}
@@ -16,4 +102,4 @@
 
 {% endfor %}
 
-{% endblock %}
+{% endblock %} {% endcomment %}
