@@ -15,7 +15,9 @@
             {% for article in articles  %}
             
             <div class="bg-green-100 rounded-lg shadow-xl">    
-                <img src="{% static "images/carnival.jpg" %}" class='h-[60%] w-full object-cover' alt="" >
+                <a href="{% url "article_detail" article.id %}">
+                    <img src="{% static "images/carnival.jpg" %}" class='h-[60%] w-full object-cover' alt="" >
+                </a>
                 <h1 class='px-2 text-lg mb-2 mt-2'>{{ article.name }}</h1>
                 <p class='text-xs px-3 leading-relaxed'>{{ article.summary }}</p>
                 <div class="text-indigo-500 text-sm">
