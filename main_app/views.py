@@ -4,19 +4,18 @@ import os
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
-from main_app.models import Article, Photo
+
+
 from django.contrib.auth.views import LoginView
 
+from main_app.models import Article, Photo
 
 
 
 
 
-class ArticleList(ListView):
-    model = Article
+class Landing(LoginView):
     template_name = 'landing.html'
-    context_object_name = 'articles'
-    queryset = Article.objects.all()
     
 class ArticleDetail(DetailView):
     model = Article

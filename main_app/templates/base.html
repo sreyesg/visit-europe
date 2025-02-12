@@ -14,13 +14,22 @@
         </div>
         <nav>
             <ul>
-                <li>
-                    <a href="{% url "article_create" %}">Create Article</a>
-                </li>
-                <li>see my posts</li>
-                <li>see all</li>
-                <li>Signout</li>
-                <li>home</li>
+                {% if user.is_authenticated %}
+                    <li>see all</li>
+                    <li><a href="{% url 'article_create' %}">Create Article</a></li>
+                    <li>see my posts</li>
+                    <li>
+                        <form id="logout-form" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Log out</button>
+                        </form>
+                    </li>
+                    
+                {% else %}
+                    <li><a href="{% url 'landing' %}">Login</a></li>
+                    <li>Sign Up</li>
+                {% endif %}
+
             </ul>
         </nav>
     </header>
