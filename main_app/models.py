@@ -2,10 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-
-# importing the User
-from django.contrib.auth.models import User
-
 class Comment(models.Model):
     content = models.TextField(max_length=250)
     comment_author = models.ForeignKey(User, on_delete=models.CASCADE)

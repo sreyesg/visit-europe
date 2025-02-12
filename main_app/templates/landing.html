@@ -11,7 +11,7 @@
     <p>{{ article.summary }}</p>
     <p>{{article.country}}</p>
     <p>{{article.city}}</p>
-    <a href="{% url "article_detail" article.id %}">Visit Article</a>
+    <a href="{% url 'article_detail' article.id %}">Visit Article</a>
 </div>
 
 {% endfor %}

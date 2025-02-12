@@ -5,6 +5,12 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from main_app.models import Article, Photo
+from django.contrib.auth.views import LoginView
+
+
+
+
+
 
 class ArticleList(ListView):
     model = Article
