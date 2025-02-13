@@ -4,8 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-psycopg2-binary = "*"
+asgiref = "==3.8.1"
+boto3 = "==1.36.11"
+botocore = "==1.36.11"
+django = "==5.1.5"
+django-tailwind = "==3.8.0"
+jmespath = "==1.0.1"
+psycopg2-binary = "==2.9.10"
+python-dateutil = "==2.9.0.post0"
+python-dotenv = "==1.0.1"
+s3transfer = "==0.11.2"
+six = "==1.17.0"
+sqlparse = "==0.5.3"
+urllib3 = "==2.3.0"
 
 [dev-packages]
 

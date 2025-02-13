@@ -8,7 +8,6 @@ urlpatterns = [
     path('articles/<int:pk>/', views.ArticleDetail.as_view(), name='article_detail'),
     path('articles/<int:pk>/update/', views.ArticleUpdate.as_view(), name='article_update'),
     path('articles/<int:pk>/delete/', views.ArticleDelete.as_view(), name='article_delete'),
-    #path('articles/<int:article_id>/add_photo', views.add_photo, name='add_photo'),
-
     path('accounts/signup/', views.signup, name='signup'),  
+    path('articles/<int:article_id>/add_photo', views.add_photo, name='add_photo'),   
 ]

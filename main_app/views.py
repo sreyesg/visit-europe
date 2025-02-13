@@ -1,6 +1,8 @@
 import uuid 
 import boto3
 import os
+from dotenv import load_dotenv
+load_dotenv()
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
@@ -57,7 +59,7 @@ class ArticleDelete(DeleteView):
     success_url = '/'
 
 def add_photo(request, article_id):
-    photo_file = request.FILE.get('photo-file', None)
+    photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
@@ -70,6 +72,6 @@ def add_photo(request, article_id):
             print('An error occured uploading file to S3')
             print(e)
     
-    return redirect('article-detail', article_id=article_id)
+    return redirect('article_detail', pk=article_id)
 
 
