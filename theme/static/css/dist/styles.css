@@ -791,28 +791,19 @@ select {
   margin: 0.5rem;
 }
 
-.m-\[20\%\] {
-  margin: 20%;
-}
-
 .mx-\[15\%\] {
   margin-left: 15%;
   margin-right: 15%;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.mx-\[20\%\] {
-  margin-left: 20%;
-  margin-right: 20%;
-}
-
 .mx-\[40\%\] {
   margin-left: 40%;
   margin-right: 40%;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-2 {
