@@ -12,8 +12,44 @@ class ArticleList(ListView):
     model = Article
     template_name = 'landing.html'
     context_object_name = 'articles'
-    queryset = Article.objects.all()
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        all_articles = Article.objects.all()
+        unique_countries = Article.objects.values_list('country', flat=True).distinct()
+
+        context['message'] = 'welcome to the app'
+        context['countryset'] = unique_countries 
+        
+        return context
+
+    # queryset = Article.objects.all()
+    # countryset = Article.objects.values_list('country', flat=True).distinct()
+
+class ArticleFilter(ListView):
+    model = Article
+    template_name = 'landing.html'
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        country = self.request.GET.get('country')
+        city = self.request.GET.get('city')
+
+        if country:
+            queryset = Article.objects.filter(country=country)
+        if city:
+            queryset = Article.objects.filter(city=city)
+    
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        unique_countries = Article.objects.values_list('country', flat=True).distinct()
+        context['countryset'] = unique_countries         
+        return context    
+
 class ArticleDetail(DetailView):
     model = Article
     template_name = 'detail.html'
