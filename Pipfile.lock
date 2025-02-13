@@ -2,6 +2,7 @@
     "_meta": {
         "hash": {
             "sha256": "e8e0f63afe3f1cb64a4cb561481ff306d4b41aa13e6f425a9fef1200ea18a6fe"
+
         },
         "pipfile-spec": 6,
         "requires": {
@@ -15,6 +16,7 @@
             }
         ]
     },
+  
     "default": {
         "arrow": {
             "hashes": [
@@ -622,5 +624,6 @@
             "version": "==6.9.0"
         }
     },
+
     "develop": {}
 }

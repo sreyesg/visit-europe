@@ -24,4 +24,9 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse("article_detail", kwargs={"pk": self.pk})
     
-# Create your models here.
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for article_id: {self.article_id}@{self.url}"
