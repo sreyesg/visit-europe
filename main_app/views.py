@@ -55,15 +55,7 @@ class ArticleDetail(DetailView):
     model = Article
     template_name = 'detail.html'
     context_object_name = 'article'
-    def get_object(self, queryset=None):
-        try:
-            print(super().get_object(queryset))
-            return super().get_object(queryset)
-        except Http404:
-            # Handle the case where the object is not found
-            # e.g., redirect to a 404 page or return a custom response
-            raise Http404("Object not found")
-
+    
 class ArticleCreate(CreateView):
     model = Article
     fields = '__all__'
