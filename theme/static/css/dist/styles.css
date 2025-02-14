@@ -881,6 +881,22 @@ select {
   height: 100vh;
 }
 
+.max-h-\[250px\] {
+  max-height: 250px;
+}
+
+.max-h-\[300px\] {
+  max-height: 300px;
+}
+
+.max-h-\[380px\] {
+  max-height: 380px;
+}
+
+.max-h-\[500px\] {
+  max-height: 500px;
+}
+
 .min-h-\[380px\] {
   min-height: 380px;
 }
@@ -959,6 +975,14 @@ select {
 
 .border-0 {
   border-width: 0px;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.border-4 {
+  border-width: 4px;
 }
 
 .bg-blue-300 {
