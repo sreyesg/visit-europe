@@ -19,9 +19,11 @@ class ArticleList(ListView):
 
         all_articles = Article.objects.all()
         unique_countries = Article.objects.values_list('country', flat=True).distinct()
+        unique_cities = Article.objects.values_list('city', flat=True).distinct()
 
         context['message'] = 'welcome to the app'
         context['countryset'] = unique_countries 
+        context['cityset'] = unique_cities 
         
         return context
 
@@ -37,7 +39,7 @@ class ArticleFilter(ListView):
         queryset = super().get_queryset()
         country = self.request.GET.get('country')
         city = self.request.GET.get('city')
-
+        
         if country:
             queryset = Article.objects.filter(country=country)
         if city:
@@ -49,6 +51,8 @@ class ArticleFilter(ListView):
         context = super().get_context_data(**kwargs)
         unique_countries = Article.objects.values_list('country', flat=True).distinct()
         context['countryset'] = unique_countries         
+        unique_cities = Article.objects.values_list('city', flat=True).distinct()
+        context['cityset'] = unique_cities         
         return context    
 
 class ArticleDetail(DetailView):

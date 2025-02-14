@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% load static tailwind_tags %}
-
 {% block head %}
 {% endblock %}
 
@@ -9,9 +8,9 @@
     <section class='bg-blue-300 w-full min-h-[380px]'>
         <img src="{% static 'images/EuroLand.jpg' %}" class='object-cover' alt="">
     </section>
-    <section class='h-[150px] mx-[20%] flex items-center bg-secondary gap-4 p-4'>
-        <div class='flex-grow flex-col justify-start border p-2'>
-            <form action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
+    <section class='h-[150px] flex items-center bg-secondary gap-4 p-4'>
+        <div class='flex-grow flex-col ml-[20%] justify-start border p-2'>
+            <form id="form-country" action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
                 <label for="country" class='flex mb-2'>Select County</label>
                 <div class='flex flex-col gap-2'>
                     <select name="country" id="country" class='w-full'>
@@ -19,24 +18,21 @@
                             <option value="{{ article }}"> {{ article }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" class='flex justify-end'>Filter</button>
-        
                 </div>
             </form>
         </div>
         <div class=''>            
             <p class='text-xs'>OR</p>
         </div>
-        <div class='flex-grow flex-col justify-start border p-2'>
-            <form action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
-                <label for="country" class='flex mb-2'>Select City</label>
+        <div class='flex-grow flex-col mr-[20%] justify-start border p-2'>
+            <form id='form-city' action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
+                <label for="city" class='flex mb-2'>Select City</label>
                 <div class='flex flex-col gap-2'>
-                    <select name="country" id="country" class='w-full'>
-                        {% for article in  countryset  %}
+                    <select name="city" id="city" class='w-full'>
+                        {% for article in  cityset  %}
                             <option value="{{ article }}"> {{ article }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" class='flex justify-end'>Filter</button>
         
                 </div>
             </form>
@@ -70,7 +66,15 @@
         </div>
     </section>
 
-
+    <script type='text/javascript'>
+        // JavaScript to trigger form submission on option selection
+        document.getElementById('country').addEventListener('change', function() {
+          document.getElementById('form-country').submit();
+        });
+        document.getElementById('city').addEventListener('change', function() {
+            document.getElementById('form-city').submit();
+          });
+      </script>
 {% endblock %}
 
 
