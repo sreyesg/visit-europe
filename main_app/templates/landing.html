@@ -9,17 +9,40 @@
     <section class='bg-blue-300 w-full min-h-[380px]'>
         <img src="{% static 'images/EuroLand.jpg' %}" class='object-cover' alt="">
     </section>
-    <form action="{% url "article_filter" %}" method="get" class='mx-[40%] bg-green-400'>
-        <label for="country">Select County</label>
-        <select name="country" id="country">
-            {% for article in  countryset  %}
-                <option value="{{ article }}"> {{ article }}</option>
-            {% endfor %}
-
-        </select>
-        <button type="submit">Filter</button>
-    </form>
-    <section class=" py-5">
+    <section class='h-[150px] mx-[20%] flex items-center bg-secondary gap-4 p-4'>
+        <div class='flex-grow flex-col justify-start border p-2'>
+            <form action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
+                <label for="country" class='flex mb-2'>Select County</label>
+                <div class='flex flex-col gap-2'>
+                    <select name="country" id="country" class='w-full'>
+                        {% for article in  countryset  %}
+                            <option value="{{ article }}"> {{ article }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class='flex justify-end'>Filter</button>
+        
+                </div>
+            </form>
+        </div>
+        <div class=''>            
+            <p class='text-xs'>OR</p>
+        </div>
+        <div class='flex-grow flex-col justify-start border p-2'>
+            <form action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
+                <label for="country" class='flex mb-2'>Select City</label>
+                <div class='flex flex-col gap-2'>
+                    <select name="country" id="country" class='w-full'>
+                        {% for article in  countryset  %}
+                            <option value="{{ article }}"> {{ article }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class='flex justify-end'>Filter</button>
+        
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class=" py-5 bg-primary">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 p-3  mx-[15%] mt-5 min-h-[500px]">
 
             {% for article in articles  %}
