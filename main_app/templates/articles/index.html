@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/articles/article-index.css' %}" />
+{% endblock %}
+{% block content %}
+
+<section class="page-header">
+    <h1>Article List</h1>
+    </section>
+
+<section class="card-container">
+    {% for article in articles %}
+        <div class="card">
+            <div class="card-content">
+                <div class="card-img-container">
+                    <img src="{% static 'images/article_placeholder.jpg' %}" alt="Article Image" />
+                </div>
+                <h2 class="card-title">{{ article.name }}</h2>
+                <p class="card-summary">{{ article.summary }}</p>
+                <p class="card-details">
+                    {{ article.city }}, {{ article.country }} <br>
+                    By: {{ article.author.username }}
+                </p>
+                <a href="{% url 'article_detail' article.id %}" class="card-link">Read More</a>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+
+{% endblock %}

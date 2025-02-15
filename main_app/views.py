@@ -5,11 +5,65 @@ from dotenv import load_dotenv
 load_dotenv()
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView, ListView
+
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+
 from main_app.models import Article, Photo
 from django.http import Http404
 
-class ArticleList(ListView):
+
+def signup(request):  # added signup 
+    error_message = ''
+    if request.method == 'POST':
+
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('landing')
+        else:
+            error_message = 'Invalid sign up - try again'
+
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'signup.html', context)
+
+def user_login(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST) 
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password) 
+            if user is not None:
+                login(request, user) 
+                return redirect('article-index') 
+            else:
+                error_message = 'Invalid login credentials' 
+        else:
+            error_message = 'Invalid login - try again' 
+
+    form = AuthenticationForm() 
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'login.html', context) 
+
+@login_required
+def article_index(request):
+
+    articles = Article.objects.filter(author=request.user)
+
+    return render(request, 'articles/index.html', {'articles': articles})
+
+
+class ArticleList(LoginView):  #(ListView)
     model = Article
     template_name = 'landing.html'
     context_object_name = 'articles'
@@ -30,7 +84,7 @@ class ArticleList(ListView):
     # queryset = Article.objects.all()
     # countryset = Article.objects.values_list('country', flat=True).distinct()
 
-class ArticleFilter(ListView):
+class ArticleFilter(LoginView): #ListView
     model = Article
     template_name = 'landing.html'
     context_object_name = 'articles'
@@ -55,22 +109,26 @@ class ArticleFilter(ListView):
         context['cityset'] = unique_cities         
         return context    
 
+
 class ArticleDetail(DetailView):
     model = Article
     template_name = 'detail.html'
     context_object_name = 'article'
 
-class ArticleCreate(CreateView):
+class ArticleCreate(LoginRequiredMixin, CreateView):
     model = Article
     fields = '__all__'
-    success_url = '/'
+    def form_valid(self, form):
 
-class ArticleUpdate(UpdateView):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
     model = Article
     fields = ['summary','content','country','city']
 
 
-class ArticleDelete(DeleteView):
+class ArticleDelete(LoginRequiredMixin, DeleteView):
     model = Article
     success_url = '/'
 

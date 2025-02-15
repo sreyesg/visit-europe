@@ -9,6 +9,7 @@
     <section class='bg-blue-300 w-full min-h-[380px]'>
         <img src="{% static 'images/Louvre.jpg' %}" class='w-full' alt="LouvreMuseum_paris">
     </section>
+    
     {% comment %} selector {% endcomment %}
     <section class='h-[150px] flex items-center bg-secondary gap-4 p-4'>
         <div class='flex-grow flex-col ml-[20%] justify-start border-2 p-2 rounded-lg shadow-xl'>
@@ -67,12 +68,10 @@
                 </div>
             </div>
             {% endfor %}
+           
             
-            
-    
         </div>
     </section>
-
     <script type='text/javascript'>
         // JavaScript to trigger form submission on option selection
         document.getElementById('country').addEventListener('change', function() {
@@ -84,45 +83,3 @@
       </script>
       
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} {% extends "base.html" %}
-{% load static %}
-{% block head %}
-{% endblock %}
-{% block content %}
-
-<h1>Landing Page</h1>
-{% for article in articles  %}
-<div>
-    <h2>{{article.name }}</h2>
-    <p>{{ article.summary }}</p>
-    <p>{{article.country}}</p>
-    <p>{{article.city}}</p>
-    <a href="{% url "article_detail" article.id %}">Visit Article</a>
-</div>
-
-{% endfor %}
-
-{% endblock %} {% endcomment %}
