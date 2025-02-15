@@ -893,6 +893,10 @@ select {
   height: 350px;
 }
 
+.h-\[\] {
+  height: ;
+}
+
 .max-h-\[250px\] {
   max-height: 250px;
 }
@@ -1152,12 +1156,32 @@ select {
     margin-top: 0px;
   }
 
+  .md\:ml-\[20\%\] {
+    margin-left: 20%;
+  }
+
+  .md\:mr-\[20\%\] {
+    margin-right: 20%;
+  }
+
+  .md\:h-\[150px\] {
+    height: 150px;
+  }
+
+  .md\:min-h-\[380px\] {
+    min-height: 380px;
+  }
+
   .md\:flex-row {
     flex-direction: row;
   }
 }
 
 @media (min-width: 1024px) {
+  .lg\:min-h-\[380px\] {
+    min-height: 380px;
+  }
+
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
