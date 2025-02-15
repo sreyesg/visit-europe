@@ -1,38 +1,64 @@
 {% extends "base.html" %}
 {% load static %}
 {% load static tailwind_tags %}
-
 {% block head %}
 {% endblock %}
 
 {% block content %}
+    {% comment %} hero {% endcomment %}
     <section class='bg-blue-300 w-full min-h-[380px]'>
-        <img src="{% static 'images/EuroLand.jpg' %}" class='object-cover' alt="">
+        <img src="{% static 'images/Louvre.jpg' %}" class='w-full' alt="LouvreMuseum_paris">
     </section>
-
-    <form action="{% url "article_filter" %}" method="get" class='mx-[40%] bg-green-400'>
-        <label for="country">Select County</label>
-        <select name="country" id="country">
-            {% for article in  countryset  %}
-                <option value="{{ article }}"> {{ article }}</option>
-            {% endfor %}
-
-        </select>
-        <button type="submit">Filter</button>
-    </form>
-    <section class=" py-5">
+    
+    {% comment %} selector {% endcomment %}
+    <section class='h-[150px] flex items-center bg-secondary gap-4 p-4'>
+        <div class='flex-grow flex-col ml-[20%] justify-start border-2 p-2 rounded-lg shadow-xl'>
+            <form id="form-country" action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
+                <label for="country" class='flex mb-2'>Select County</label>
+                <div class='flex flex-col gap-2'>
+                    <select name="country" id="country" class='w-full'>
+                        {% for article in  countryset  %}
+                            <option value="{{ article }}"> {{ article }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class=''>            
+            <p class='text-xs'>OR</p>
+        </div>
+        <div class='flex-grow flex-col mr-[20%] justify-start border-2 p-2 rounded-lg shadow-xl'>
+            <form id='form-city' action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
+                <label for="city" class='flex mb-2'>Select City</label>
+                <div class='flex flex-col gap-2'>
+                    <select name="city" id="city" class='w-full'>
+                        {% for article in  cityset  %}
+                            <option value="{{ article }}"> {{ article }}</option>
+                        {% endfor %}
+                    </select>
+        
+                </div>
+            </form>
+        </div>
+    </section>
+    {% comment %} aricles grid {% endcomment %}
+    <section class=" py-5 bg-primary">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 p-3  mx-[15%] mt-5 min-h-[500px]">
-
-            {% for article in articles  %}
             
-            <div class="bg-green-100 rounded-lg shadow-xl">    
+            
+            {% for article in articles  %}
+            <div class="h-[350px] bg-green-100 rounded-lg shadow-xl">    
                 <a href="{% url "article_detail" article.id %}">
-                    <img src="{% static "images/carnival.jpg" %}" class='h-[60%] w-full object-cover' alt="" >
+
+                    {% for photo in article.photo_set.all  %}
+                        <img src="{{ photo.url }}" class='h-[60%] w-full object-cover' alt=" {{ article.name }}" >
+                    {% endfor %}
+                    
                 </a>
                 <h1 class='px-2 text-lg mb-2 mt-2'>{{ article.name }}</h1>
                 <p class='text-xs px-3 leading-relaxed'>{{ article.summary }}</p>
                 <div class="text-indigo-500 text-sm">
-                    <a href="" class='flex justify-end items-center'>Learn More
+                    <a href="{% url "article_detail" article.id %}" class='flex justify-end items-center'>Learn More
                         <svg class="w-4 h-4 m-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
                             <path d="M12 5l7 7-7 7"></path>
@@ -42,48 +68,18 @@
                 </div>
             </div>
             {% endfor %}
-            
-            
+           
             
         </div>
     </section>
-    
-    {% if not user.is_authenticated %}  
-      <!-- <section>
-          <form action="{% url 'landing' %}" method="post" class="login">
-            <h1>Login</h1>
-            {% csrf_token %} {{ form.as_p }}
-            <input type="hidden" name="next" value="{{ next }}" />
-            <button type="submit" class="btn submit">Login</button> 
-          </form>
-      </section> -->
+    <script type='text/javascript'>
+        // JavaScript to trigger form submission on option selection
+        document.getElementById('country').addEventListener('change', function() {
+          document.getElementById('form-country').submit();
+        });
+        document.getElementById('city').addEventListener('change', function() {
+            document.getElementById('form-city').submit();
+          });
+      </script>
       
-    {% endif %}
-    
-    
-    
-    
-    {% endblock %}
-    
-    
-    
-    {% comment %} {% extends "base.html" %}
-    {% load static %}
-    {% block head %}
-    {% endblock %}
-    {% block content %}
-    
-    <h1>Landing Page</h1>
-    {% for article in articles  %}
-    <div>
-        <h2>{{article.name }}</h2>
-        <p>{{ article.summary }}</p>
-        <p>{{article.country}}</p>
-        <p>{{article.city}}</p>
-        <a href="{% url "article_detail" article.id %}">Visit Article</a>
-    </div>
-    
-    
-{% endfor %}
-
-{% endblock %} {% endcomment %}
+{% endblock %}
