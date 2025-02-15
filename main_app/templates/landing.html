@@ -9,6 +9,7 @@
     <section class='bg-blue-300 w-full min-h-[380px]'>
         <img src="{% static 'images/EuroLand.jpg' %}" class='object-cover' alt="">
     </section>
+
     <form action="{% url "article_filter" %}" method="get" class='mx-[40%] bg-green-400'>
         <label for="country">Select County</label>
         <select name="country" id="country">
@@ -43,51 +44,46 @@
             {% endfor %}
             
             
-    
+            
         </div>
     </section>
-
-
-{% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} {% extends "base.html" %}
-{% load static %}
-{% block head %}
-{% endblock %}
-{% block content %}
-
-<h1>Landing Page</h1>
-{% for article in articles  %}
-<div>
-    <h2>{{article.name }}</h2>
-    <p>{{ article.summary }}</p>
-    <p>{{article.country}}</p>
-    <p>{{article.city}}</p>
-    <a href="{% url "article_detail" article.id %}">Visit Article</a>
-</div>
-
+    
+    {% if not user.is_authenticated %}  
+      <!-- <section>
+          <form action="{% url 'landing' %}" method="post" class="login">
+            <h1>Login</h1>
+            {% csrf_token %} {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" class="btn submit">Login</button> 
+          </form>
+      </section> -->
+      
+    {% endif %}
+    
+    
+    
+    
+    {% endblock %}
+    
+    
+    
+    {% comment %} {% extends "base.html" %}
+    {% load static %}
+    {% block head %}
+    {% endblock %}
+    {% block content %}
+    
+    <h1>Landing Page</h1>
+    {% for article in articles  %}
+    <div>
+        <h2>{{article.name }}</h2>
+        <p>{{ article.summary }}</p>
+        <p>{{article.country}}</p>
+        <p>{{article.city}}</p>
+        <a href="{% url "article_detail" article.id %}">Visit Article</a>
+    </div>
+    
+    
 {% endfor %}
 
 {% endblock %} {% endcomment %}
