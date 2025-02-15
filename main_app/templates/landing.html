@@ -50,7 +50,7 @@
                 <a href="{% url "article_detail" article.id %}">
 
                     {% for photo in article.photo_set.all  %}
-                        <img src="{{ photo.url }}" class='h-[60%] w-full object-cover' alt="" >
+                        <img src="{{ photo.url }}" class='h-[60%] w-full object-cover' alt=" {{ article.name }}" >
                     {% endfor %}
                     
                 </a>
