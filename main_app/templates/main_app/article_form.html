@@ -19,8 +19,8 @@
 {% block content %}
 
 <div class="page-header bg-white p-8 rounded-lg shadow-md mb-6">  {% if article  %}
-    <h1 class="text-3xl font-bold text-ocean-blue mb-4">Edit: {{ article.name }}</h1> {% else %}
-    <h1 class="text-3xl font-bold text-ocean-blue mb-4">Add an Article</h1> {% endif %}
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Edit: {{ article.name }}</h1> {% else %}
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Add an Article</h1> {% endif %}
     <img src="" alt="" class="max-w-full h-auto">  </div>
 
 <form action="" method='POST' class="bg-white p-8 rounded-lg shadow-md"> {% csrf_token %}
