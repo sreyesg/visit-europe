@@ -17,17 +17,29 @@
 {% endblock %}
 
 {% block content %}
+<div class="page-header bg-white p-8 rounded-lg shadow-md mb-6">
+  {% if article %}
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Edit: {{ article.name }}</h1>
+  {% else %}
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Add an Article</h1>
+  {% endif %}
+  <p class="text-lg text-gray-600 mb-4 text-center">
+    Author: 
+    {% if article %}
+        {{ article.author }}
+    {% else %}
+        {{ user.username }}
+    {% endif %}
+</p>
 
-<div class="page-header bg-white p-8 rounded-lg shadow-md mb-6">  {% if article  %}
-    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Edit: {{ article.name }}</h1> {% else %}
-    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Add an Article</h1> {% endif %}
-    <img src="" alt="" class="max-w-full h-auto">  </div>
 
-<form action="" method='POST' class="bg-white p-8 rounded-lg shadow-md"> {% csrf_token %}
-<table class="table-auto w-full">  {{ form.as_table }}
-</table>
-<button type="submit" class="mr-5 hover:text-white-200 hover:bg-blue-400 bg-secondary inline-flex items-center  border-0 py-1 px-3 focus:outline-none  rounded mt-4 md:mt-0">  Submit
-</button>
+<form action="" method='POST' class="bg-white p-8 rounded-lg shadow-md">
+  {% csrf_token %}
+  <table class="table-auto w-full">
+    {{ form.as_table }}
+  </table>
+  <button type="submit" class="mr-5 hover:text-white-200 hover:bg-blue-400 bg-secondary inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded mt-4 md:mt-0">
+    Submit
+  </button>
 </form>
-
 {% endblock %}

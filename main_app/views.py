@@ -3,7 +3,7 @@ import boto3
 import os
 from dotenv import load_dotenv
 load_dotenv()
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.views.generic import DetailView, UpdateView, DeleteView, ListView
 
@@ -11,12 +11,14 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 
-from main_app.models import Article, Photo
+from main_app.models import Article, Photo, Comment
+from .forms import CommentForm
 from django.http import Http404
+from django.urls import reverse_lazy
 
 
 def signup(request):  # added signup 
@@ -116,13 +118,35 @@ class ArticleDetail(DetailView):
     template_name = 'detail.html'
     context_object_name = 'article'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = CommentForm()
+        article = self.get_object() 
+        context['comments'] = Comment.objects.filter(article=article).order_by('-comment_author') 
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object() 
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.comment_author = request.user  
+            comment.article = self.object
+            comment.save()
+            return redirect('article_detail', pk=self.object.pk)
+        return self.get(request, *args, **kwargs)
+
+
 class ArticleCreate(LoginRequiredMixin, CreateView):
     model = Article
-    fields = '__all__'
+    fields = ['name', 'summary','content','country','city']  # added 'name' field **
+
     def form_valid(self, form):
 
-        form.instance.user = self.request.user
+        form.instance.author = self.request.user # changed from name to --> author 
         return super().form_valid(form)
+
 
 class ArticleUpdate(LoginRequiredMixin, UpdateView):
     model = Article
@@ -150,3 +174,30 @@ def add_photo(request, article_id):
     return redirect('article_detail', pk=article_id)
 
 
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'comment_update.html'
+    
+    def form_valid(self, form):
+        form.instance.comment_author = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('article_detail', kwargs={'pk': self.object.article.pk})
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user == comment.comment_author
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = 'comment_confirm_delete.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('article_detail', kwargs={'pk': self.object.article.pk})
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user == comment.comment_author

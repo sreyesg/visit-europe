@@ -8,7 +8,8 @@
     <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Article Details</h1>
 
     <div class="flex justify-center">
-        <div class="w-2/3 bg-white rounded-lg shadow-lg p-8">  <div class="mb-8">
+        <div class="w-2/3 bg-white rounded-lg shadow-lg p-8">
+            <div class="mb-8">
                 {% for photo in article.photo_set.all %}
                     <img src="{{ photo.url }}" alt="" class="max-w-full h-auto rounded-lg mb-4 object-cover">
                 {% empty %}
@@ -28,7 +29,8 @@
                 <h1 class="text-2xl font-bold mb-4 text-gray-800">{{ article.name }}</h1>
                 <p class="text-gray-700 leading-relaxed">{{ article.content }}</p>
 
-                <div class="mt-8 flex justify-center">  <a href="{% url 'article_update' article.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                <div class="mt-8 flex justify-center">
+                    <a href="{% url 'article_update' article.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
                         Update
                     </a>
                     <a href="{% url 'article_delete' article.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
@@ -36,6 +38,39 @@
                     </a>
                 </div>
             </div>
+
+            <hr class="my-8">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+            <hr class="my-8">
+
+            <h3>Comments:</h3>
+            {% for comment in comments %}
+                <div class="mb-4">
+                    <strong>{{ comment.comment_author.username }}</strong>: {{ comment.content }}
+                    {% if comment.comment_author == request.user %}
+                        <a href="{% url 'comment_update' pk=comment.pk %}">Edit</a> |
+                        <a href="{% url 'comment_delete' pk=comment.pk %}">Delete</a>
+                    {% endif %}
+                </div>
+                <hr class="my-4">
+            {% empty %}
+                <p>No comments yet. Be the first to comment!</p>
+            {% endfor %}
+
+            <hr class="my-8">
+
+            <h3>Add a Comment:</h3>
+            {% if user.is_authenticated %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <button type="submit" class="mr-5 hover:text-white-200 hover:bg-blue-400 bg-secondary inline-flex items-center border-0 py-1 px-3 focus:outline-none rounded mt-4 md:mt-0">Post Comment</button>
+                </form>
+            {% else %}
+                <p>You must be logged in to comment.</p>
+            {% endif %}
+
         </div>
     </div>
 
