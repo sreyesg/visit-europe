@@ -150,3 +150,4 @@ def add_photo(request, article_id):
     return redirect('article_detail', pk=article_id)
 
 
+
