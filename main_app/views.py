@@ -16,6 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from main_app.models import Article, Photo
+from django.http import Http404
 
 
 def signup(request):  # added signup 
@@ -62,7 +63,7 @@ def article_index(request):
     return render(request, 'articles/index.html', {'articles': articles})
 
 
-class ArticleList(LoginView):  #(ListView)
+class ArticleList(ListView):  #(ListView)
     model = Article
     template_name = 'landing.html'
     context_object_name = 'articles'
@@ -70,18 +71,21 @@ class ArticleList(LoginView):  #(ListView)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        all_articles = Article.objects.all()
+        #all_articles = Article.objects.all()
         unique_countries = Article.objects.values_list('country', flat=True).distinct()
+        unique_cities = Article.objects.values_list('city', flat=True).distinct()
 
         context['message'] = 'welcome to the app'
         context['countryset'] = unique_countries 
+        context['cityset'] = unique_cities 
+        #context['articles'] = all_articles
         
         return context
 
     # queryset = Article.objects.all()
     # countryset = Article.objects.values_list('country', flat=True).distinct()
 
-class ArticleFilter(LoginView): #ListView
+class ArticleFilter(ListView): #ListView
     model = Article
     template_name = 'landing.html'
     context_object_name = 'articles'
@@ -90,7 +94,7 @@ class ArticleFilter(LoginView): #ListView
         queryset = super().get_queryset()
         country = self.request.GET.get('country')
         city = self.request.GET.get('city')
-
+        
         if country:
             queryset = Article.objects.filter(country=country)
         if city:
@@ -102,6 +106,8 @@ class ArticleFilter(LoginView): #ListView
         context = super().get_context_data(**kwargs)
         unique_countries = Article.objects.values_list('country', flat=True).distinct()
         context['countryset'] = unique_countries         
+        unique_cities = Article.objects.values_list('city', flat=True).distinct()
+        context['cityset'] = unique_cities         
         return context    
 
 
