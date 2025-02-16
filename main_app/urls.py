@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from main_app.views import ArticleCreate, ArticleDetail, ArticleList, ArticleUpdate, ArticleFilter
+from main_app.views import ArticleCreate, ArticleDetail, ArticleList, ArticleUpdate, ArticleFilter, CommentUpdateView, CommentDeleteView
 
 urlpatterns = [
     path('', views.ArticleList.as_view(), name='landing'),
@@ -14,5 +14,8 @@ urlpatterns = [
 
     path('accounts/login/', views.user_login, name='login'),
     path('accounts/signup/', views.signup, name='signup'),
+
+    path('comments/<int:pk>/update/', views.CommentUpdateView.as_view(), name='comment_update'),
+    path('comments/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment_delete'),
 
 ]
