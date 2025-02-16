@@ -3,7 +3,7 @@
     {% tailwind_css %}  <link rel="stylesheet" href="{% static 'css/form.css' %}" />  {% endblock %}
 
 {% block content %}
-<div class="page-header container mx-auto p-4">  <h1 class="text-3xl font-bold mb-4">Sign Up</h1>  <img src="" alt="Logo" class="max-w-xs mx-auto mb-4">  </div>
+<div class="page-header container mx-auto p-4">  <h1 class="text-3xl font-bold mb-4">Sign Up</h1> </div>
 
 {% if error_message %}
     <p class="red-text text-red-500 mb-4">{{ error_message }}</p>  {% endif %}
@@ -14,7 +14,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <button type="submit" class="btn submit bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">  Submit!
+    <button type="submit" class="mr-5 hover:text-white-200 hover:bg-blue-400 bg-secondary inline-flex items-center  border-0 py-1 px-3 focus:outline-none  rounded mt-4 md:mt-0">  Submit!
     </button>
 </form>
 
