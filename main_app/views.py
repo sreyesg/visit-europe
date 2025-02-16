@@ -63,7 +63,7 @@ def article_index(request):
     return render(request, 'articles/index.html', {'articles': articles})
 
 
-class ArticleList(ListView):  #(ListView)
+class ArticleList(ListView):  
     model = Article
     template_name = 'landing.html'
     context_object_name = 'articles'
@@ -85,7 +85,7 @@ class ArticleList(ListView):  #(ListView)
     # queryset = Article.objects.all()
     # countryset = Article.objects.values_list('country', flat=True).distinct()
 
-class ArticleFilter(ListView): #ListView
+class ArticleFilter(ListView): 
     model = Article
     template_name = 'landing.html'
     context_object_name = 'articles'
@@ -148,6 +148,5 @@ def add_photo(request, article_id):
             print(e)
     
     return redirect('article_detail', pk=article_id)
-
 
 
