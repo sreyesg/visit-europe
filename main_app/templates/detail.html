@@ -3,29 +3,42 @@
 {% block head %}{% endblock %}
 {% block content %}
 
-<h1>Article Details</h1>
+<div class="container mx-auto p-4">
 
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Article Details</h1>
 
-<div>
-    {% for photo  in article.photo_set.all  %}
-        <img src="{{ photo.url }}" alt="">
-        {% empty %}
+    <div class="flex justify-center">
+        <div class="w-2/3 bg-white rounded-lg shadow-lg p-8">  <div class="mb-8">
+                {% for photo in article.photo_set.all %}
+                    <img src="{{ photo.url }}" alt="" class="max-w-full h-auto rounded-lg mb-4 object-cover">
+                {% empty %}
+                    <div class="text-gray-500">No photos uploaded</div>
+                {% endfor %}
 
-        <div>No photos uploaded</div>
-    
-    {% endfor %}
-    <form action="{% url 'add_photo' article.id %}" enctype="multipart/form-data" method="POST" class="subsection-content">
-        {% csrf_token %}
-        <input type="file" name="photo-file">
-        <br><br>
-        <button type="submit" class="btn">Upload Photo</button>
-    </form>
-</div>
-<div>
-    <h1>{{ article.name }}</h1>
-    <p>{{ article.content }}</p>
-    <a href="{% url "article_update" article.id %}">Update</a>
-    <a href="{% url "article_delete" article.id %}">Delete</a>
+                <form action="{% url 'add_photo' article.id %}" enctype="multipart/form-data" method="POST" class="mt-6">
+                    {% csrf_token %}
+                    <input type="file" name="photo-file" class="mb-4 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" class="w-full bg-ocean-blue hover:bg-ocean-blue-dark text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Upload Photo
+                    </button>
+                </form>
+            </div>
+
+            <div>
+                <h1 class="text-2xl font-bold mb-4 text-gray-800">{{ article.name }}</h1>
+                <p class="text-gray-700 leading-relaxed">{{ article.content }}</p>
+
+                <div class="mt-8 flex justify-center">  <a href="{% url 'article_update' article.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                        Update
+                    </a>
+                    <a href="{% url 'article_delete' article.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
