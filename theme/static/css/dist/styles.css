@@ -945,10 +945,6 @@ select {
   max-width: 28rem;
 }
 
-.max-w-xs {
-  max-width: 20rem;
-}
-
 .flex-grow {
   flex-grow: 1;
 }
