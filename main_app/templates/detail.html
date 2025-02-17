@@ -11,7 +11,7 @@
         <div class="w-2/3 bg-white rounded-lg shadow-lg p-8">
             <div class="mb-8">
                 {% for photo in article.photo_set.all %}
-                    <img src="{{ photo.url }}" alt="" class="max-w-full h-auto rounded-lg mb-4 object-cover">
+                    <img src="{{ photo.url }}" alt="{{ article.name }}" class="max-w-full h-auto rounded-lg mb-4 object-cover">
                 {% empty %}
                     <div class="text-gray-500">No photos uploaded</div>
                 {% endfor %}
@@ -31,10 +31,10 @@
 
                 <div class="mt-8 flex justify-center">
                   {% if article.author == user %}
-                    <a href="{% url 'article_update' article.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+                    <a href="{% url 'article_update' article.id %}" class="bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
                         Update
                     </a>
-                    <a href="{% url 'article_delete' article.id %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
+                    <a href="{% url 'article_delete' article.id %}" class="bg-secondary hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300">
                         Delete
                     </a>
                    {% endif %}
