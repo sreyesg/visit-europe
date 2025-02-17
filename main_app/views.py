@@ -21,7 +21,7 @@ from django.http import Http404
 from django.urls import reverse_lazy
 
 
-def signup(request):  # added signup 
+def signup(request):  
     error_message = ''
     if request.method == 'POST':
 
@@ -73,19 +73,18 @@ class ArticleList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        #all_articles = Article.objects.all()
+        
         unique_countries = Article.objects.values_list('country', flat=True).distinct()
         unique_cities = Article.objects.values_list('city', flat=True).distinct()
 
         context['message'] = 'welcome to the app'
         context['countryset'] = unique_countries 
         context['cityset'] = unique_cities 
-        #context['articles'] = all_articles
         
         return context
 
-    # queryset = Article.objects.all()
-    # countryset = Article.objects.values_list('country', flat=True).distinct()
+    
+    
 
 class ArticleFilter(ListView): 
     model = Article
@@ -140,11 +139,11 @@ class ArticleDetail(DetailView):
 
 class ArticleCreate(LoginRequiredMixin, CreateView):
     model = Article
-    fields = ['name', 'summary','content','country','city']  # added 'name' field **
+    fields = ['name', 'summary','content','country','city']  
 
     def form_valid(self, form):
 
-        form.instance.author = self.request.user # changed from name to --> author 
+        form.instance.author = self.request.user 
         return super().form_valid(form)
 
 
