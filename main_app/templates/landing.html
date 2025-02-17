@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    {% comment %} hero {% endcomment %}
+    
     <section class='bg-blue-300 w-full md:min-h-[380px]'>
         <img src="{% static 'images/Louvre.jpg' %}" class='w-full' alt="LouvreMuseum_paris">
     </section>
     
-    {% comment %} selector {% endcomment %}
+    
     <section class='md:h-[150px] flex items-center bg-secondary gap-4 p-4'>
         <div class='flex-grow flex-col md:ml-[20%] justify-start border-2 p-2 rounded-lg shadow-xl'>
             <form id="form-country" action="{% url "article_filter" %}" method="get" class='flex-col gap-4'>
@@ -41,7 +41,7 @@
             </form>
         </div>
     </section>
-    {% comment %} aricles grid {% endcomment %}
+    
     <section class=" py-5 bg-primary">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 p-3  mx-[15%] mt-5 min-h-[500px]">
             
@@ -73,7 +73,7 @@
         </div>
     </section>
     <script type='text/javascript'>
-        // JavaScript to trigger form submission on option selection
+        
         document.getElementById('country').addEventListener('change', function() {
           document.getElementById('form-country').submit();
         });
