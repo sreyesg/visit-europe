@@ -1,6 +1,6 @@
 # visitEurope 
 
-![Screenshot 2025-02-16 at 10 27 18 PM](https://github.com/user-attachments/assets/6b83fc02-ec4f-4347-bb56-793cdd7b59f2)
+![Screenshot 2025-02-17 at 5 42 44 PM](https://github.com/user-attachments/assets/90cbf4d1-de6d-474b-ae0a-886b548373ad)
 
 
 
@@ -51,8 +51,12 @@ MVP Requirements
 
 
 Atrributions
-- 
+- Images from: https://unsplash.com/
+
 
 
 Technologies used 
-- 
+- Django
+- Tailwind
+- Github
+- Html
